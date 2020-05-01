@@ -8,8 +8,12 @@ docker
 laradock
 usage:
 
-download all files to a directory
+# download all files to a directory
+
 ```chmod 755 *```
+
 ```./install_git```
+
 ```./install_docker```
+
 ```./install_laradock```
