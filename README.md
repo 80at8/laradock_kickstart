@@ -6,5 +6,10 @@ installs:
 git
 docker
 laradock
+usage:
 
-tested on Ubuntu 16.04
+download all files to a directory
+```chmod 755 *```
+```./install_git```
+```./install_docker```
+```./install_laradock```
