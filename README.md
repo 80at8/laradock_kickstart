@@ -1,11 +1,6 @@
 # laradock_kickstart
+installs git, docker and starts laradock
 
-quickly provisions laradock.
-
-installs:
-git
-docker
-laradock
 usage:
 
 download all files to a directory
