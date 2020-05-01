@@ -1,0 +1,14 @@
+#!/bin/bash
+
+sudo apt-get --assume-yes upgrade
+sudo apt-get --assume-yes install docker.io
+sudo apt-get --assume-yes install python3-pip
+sudo pip3 install --upgrade pip 
+sudo pip3 install setuptools docker-compose
+
+#add local user to the docker group
+echo "Adding user $USER to the docker group"
+sudo usermod -G docker -a "$USER"
+
+sudo systemctl start docker
+sudo systemctl enable docker

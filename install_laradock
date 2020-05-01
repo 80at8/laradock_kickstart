@@ -1,0 +1,48 @@
+#!/bin/bash
+if [ $# -lt 1 ]
+  then
+    echo "***"
+    echo "Please provide a project name and github url for this project"
+    echo "example: ./setup_laradock [project-name] [github-url]"
+    echo ""
+    echo "laradock will be cloned into ~/laradock-[project-name]"
+    echo "project files should go into ~/laradock-[project-name]/project-[project-name]"
+    echo "***"
+    exit 1
+fi
+
+# Set up path variables
+laradockPath="${HOME}/laradock-$1"
+projectPath="${HOME}/project-$1"
+cd "${HOME}"
+
+# Clone laradock into new laradock folder.
+git clone https://github.com/laradock/laradock.git $laradockPath
+
+# Set up the .env file
+cp $laradockPath/env-example $laradockPath/.env
+
+# Update Project Name in .env (default is COMPOSE_PROJECT_NAME=laradock)
+echo "Updating .env file with new project name..."
+sed -i "s/COMPOSE_PROJECT_NAME=laradock/COMPOSE_PROJECT_NAME=project-$1/g" $laradockPath/.env
+
+# Clone the github repo into this project path.
+git clone "$2"  $projectPath
+
+# Update Application Path (default is APP_CODE_PATH_HOST=../)
+echo "Updating .env file with the new project path..."
+sed -i "s/APP_CODE_PATH_HOST=..\//APP_CODE_PATH_HOST=${projectPath//\//\\/}/g" $laradockPath/.env
+
+
+
+
+
+echo ""
+echo "***"
+echo "laradock is installed in $laradockPath"
+echo ""
+echo "Edit the $laradockPath/.env file to set the project path and"
+echo "choose which packages to install. Then run docker-compose."
+echo ""
+echo "Try 'docker-compose up -d nginx mysql'"
+echo "***"
