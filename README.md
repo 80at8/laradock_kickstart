@@ -8,7 +8,7 @@ docker
 laradock
 usage:
 
-# download all files to a directory
+download all files to a directory
 
 ```chmod 755 *```
 
